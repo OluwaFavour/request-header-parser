@@ -28,3 +28,14 @@ app.get('/api/hello', function (req, res) {
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+// whoami handler
+function whoAmIHandler(req, res) {
+  const ipaddress = req.ip;
+  const language = req.headers['accept-language'];
+  const software = req.headers['user-agent'];
+
+  res.json({ "ipaddress": ipaddress, "language": language, "software": software });
+}
+
+app.get('/api/whoami', whoAmIHandler);
